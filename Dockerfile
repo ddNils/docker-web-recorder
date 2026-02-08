@@ -14,7 +14,7 @@ WORKDIR /app
 COPY package.json yarn.lock tsconfig.json ./
 RUN yarn install --frozen-lockfile
 COPY docker-entrypoint.sh /usr/local/bin/
-RUN sed -i 's/\r$//' /usr/local/bin/docker-entrypoint.sh && chmod +x /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 COPY src src
 RUN yarn build && rm -rf src && yarn install --frozen-lockfile --prod && yarn cache clean && mkdir recordings && chmod 777 recordings
 
